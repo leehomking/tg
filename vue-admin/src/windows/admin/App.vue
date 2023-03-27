@@ -5,6 +5,7 @@ import { platformStyle } from '../../assets/js/styles';
 import AdminHeader from './views/AdminHeader.vue';
 import AdminMain from './views/AdminMain.vue';
 import { useDark } from '@vueuse/core';
+import menuTree from '../../assets/js/menu';
 const { innerAsideStyle, mainStyle, headerStyle, asideStyle, toggleAside, asideSwitchStyle } = platformStyle()!;
 useDark()
 </script>
@@ -17,23 +18,17 @@ useDark()
         <el-main>
           <el-container>
             <el-aside :style="asideStyle">
-                <el-menu
-        default-active="1"
-      >
-        <el-sub-menu index="1">
-          <template #title>
-            <el-icon><location /></el-icon>
-            <span>权限管理</span>
-          </template>
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item two</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-        </el-sub-menu>
-      </el-menu>
+                <el-menu default-active="1" >
+                  <el-sub-menu :index="menu.id" v-for="menu in menuTree">
+                    <template #title>
+                      <el-icon><location /></el-icon>
+                      <span>{{ menu.desc }}</span>
+                    </template>
+                    <el-menu-item-group title="" v-for="submenu in menu.subMenus">
+                      <el-menu-item :index="submenu.id">{{ submenu.desc }}</el-menu-item>
+                    </el-menu-item-group>
+                  </el-sub-menu>
+                </el-menu>
             </el-aside>
             <el-main :style="mainStyle">
                 <AdminMain/>
@@ -65,32 +60,39 @@ useDark()
 .el-header {
     border: none;
     border-bottom: 1px solid var(--el-border-color-light);
-    background-color: var(--el-fill-color-light);
-
+    /* background-color: var(--el-fill-color-light); */
+    background-color: var(--el-bg-color);
 }
 
 
 .el-main {
     padding: 0px;
+    background-color: var(--el-fill-color-light);
 }
 
-.el-menu {
+:deep() .el-menu {
     padding: 8px;
     background-color: var(--transparent-bg);
     height: 100%;
+    border-right: none;
 }
 
 
 .el-sub-menu .el-menu-item {
     height: 30px;
     margin-bottom: 4px;
+    background-color: var(--transparent-bg)
+}
+
+.el-sub-menu {
+    background-color: var(--transparent-bg)
 }
 
 .el-menu-item.is-active {
-    background-color: var(--focus-background-color);
-    color: #E5EAF3;
+    /* background-color: var(--focus-background-color);
+    color: #E5EAF3; */
     font-weight: bold;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 
 .el-menu-item:hover {

@@ -1,9 +1,8 @@
 <template>
     <el-tabs
       v-model="editableTabsValue"
-      type="card"
-      class="demo-tabs"
-      closable
+      class="admin-tabs"
+
       @tab-remove="removeTab"
     >
       <el-tab-pane
@@ -12,28 +11,89 @@
         :label="item.title"
         :name="item.name"
       >
-        {{ item.content }}
+      <el-table :data="tableData" style="width: 100%" height="600">
+    <el-table-column fixed prop="date" label="Date" width="150" />
+    <el-table-column prop="name" label="Name" width="120" />
+    <el-table-column prop="state" label="State" width="120" />
+    <el-table-column prop="city" label="City" width="320" />
+    <el-table-column prop="address" label="Address" width="600" />
+    <el-table-column prop="zip" label="Zip" width="120" />
+  </el-table>
       </el-tab-pane>
     </el-tabs>
   </template>
   <script lang="ts" setup>
   import { ref } from 'vue'
   
-  let tabIndex = 2
-  const editableTabsValue = ref('2')
+  let tabIndex = 1
+  const editableTabsValue = ref('1')
   const editableTabs = ref([
     {
-      title: 'Tab 1',
+      title: '我的用户',
       name: '1',
       content: 'Tab 1 content',
     },
-    {
-      title: 'Tab 2',
-      name: '2',
-      content: 'Tab 2 content',
-    },
   ])
   
+  const tableData = [
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-08',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-06',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+  {
+    date: '2016-05-07',
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  },
+]
+
   const addTab = (targetName: string) => {
     const newTabName = `${++tabIndex}`
     editableTabs.value.push({
@@ -62,11 +122,19 @@
   }
   </script>
   <style>
-  .demo-tabs > .el-tabs__content {
-    padding: 32px;
-    color: #6b778c;
-    font-size: 32px;
-    font-weight: 600;
-  }
+ .admin-tabs {
+    margin: 8px;
+    
+ }
+.admin-tabs > .el-tabs__content {
+  box-shadow: var(--box-shadow);
+  border-radius: 4px;
+  padding: 32px;
+  background-color: var(--el-bg-color);
+}
+
+.el-tabs__nav-wrap::after {
+position: static !important;
+}
   </style>
   
