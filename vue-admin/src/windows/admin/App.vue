@@ -67,15 +67,20 @@ useDark()
 
 .el-main {
     padding: 0px;
+    
     background-color: var(--el-fill-color-light);
 }
 
 :deep() .el-menu {
-    padding: 8px;
+    padding: 4px;
     background-color: var(--transparent-bg);
     height: 100%;
     border-right: none;
 }
+
+/* :deep() .el-sub-menu__title:hover {
+  border-radius: 8px;
+} */
 
 
 .el-sub-menu .el-menu-item {
